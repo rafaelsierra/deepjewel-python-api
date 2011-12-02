@@ -11,6 +11,7 @@ class TestSendData(unittest.TestCase):
         # To run the tests we need a valid key
         try:
             self.key = raw_input('Enter your DeepJewel Key: ')
+            deepapi.key(key)
         except IndexError, e:
             raise MissingKeyException('You must run the test with an extra argument: Your DeepJewel Key')
 
