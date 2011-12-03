@@ -1,3 +1,8 @@
-from deepapi.actions import recommend, send, key
+from deepapi.actions import Client, MissingKeyError, InvalidKeyError
 
-__all__ = ['recommend', 'send', 'key']
+client = Client()
+send = client.send
+recommend = client.recommend
+set_key = client.set_key
+
+__all__ = ['recommend', 'send', 'key', 'InvalidKeyError', 'MissingKeyError']

@@ -7,15 +7,15 @@ class MissingKeyException(Exception):
     pass
 
 class TestSendData(unittest.TestCase):
-    def test_01_key(self):
+    def test_01(self): # Set key
         # To run the tests we need a valid key
         try:
             self.key = raw_input('Enter your DeepJewel Key: ')
-            deepapi.key(key)
+            deepapi.set_key(self.key)
         except IndexError, e:
             raise MissingKeyException('You must run the test with an extra argument: Your DeepJewel Key')
 
-    def test_01_send_data(self):
+    def test_02(self): # Send Data
         # This is your product.id or post.id or user.screen_name or whatever 
         # you think is useful, anything up to 500 chars
         your_data = '1234' 
@@ -41,7 +41,7 @@ everything will be parsed at the server side\nNew lines\ttabs, everything,
         # Simple like that :)
         self.assertTrue(created)
     
-    def test_02_recommend(self):
+    def test_03(self): # Recommend
         # It may take some seconds to flush data into database
         time.sleep(5)
         response = deepapi.recommend('en|post', '''Here again we send what text we want to
@@ -49,7 +49,7 @@ base our recommendation, useful texts are user timeline, user feed, product desc
 blog post and other relevant information''')
         # Recommendations will always be relevant sorted, first result
         # being the most relevant and last the least
-        
+        # Inspect this return to get more information
         self.assertEqual(response[0]['your_data'], '1234')
         
 
