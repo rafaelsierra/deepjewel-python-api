@@ -5,4 +5,4 @@ send = client.send
 recommend = client.recommend
 set_key = client.set_key
 
-__all__ = ['recommend', 'send', 'key', 'InvalidKeyError', 'MissingKeyError']
+__all__ = ['recommend', 'send', 'set_key', 'InvalidKeyError', 'MissingKeyError']
