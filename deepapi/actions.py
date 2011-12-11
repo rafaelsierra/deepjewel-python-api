@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 import simplejson
-import urllib, urllib2
+import urllib2
+from deepapi.utils import urlencode
 
 DOMAIN = 'http://ec2-107-22-86-216.compute-1.amazonaws.com'
 ITEM_URL = '%s/api/item.json'%(DOMAIN)
@@ -55,7 +56,7 @@ class Client(object):
         }
         request = DJRequest(ITEM_URL)
         request.set_method('POST')
-        request.add_data(urllib.urlencode(params))
+        request.add_data(urlencode(params))
         request.set_key(self._key)
         response = request.open()
         # Python 2.4 compatible return
@@ -69,7 +70,7 @@ class Client(object):
         }
         request = DJRequest(RECOMMEND_URL)
         request.set_method('POST')
-        request.add_data(urllib.urlencode(params))
+        request.add_data(urlencode(params))
         request.set_key(self._key)
         response = request.open()
         if response.code == 200:
