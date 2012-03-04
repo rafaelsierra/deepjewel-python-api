@@ -10,7 +10,9 @@ class TestSendData(unittest.TestCase):
     def test_01(self): # Set key
         # To run the tests we need a valid key
         try:
-            self.key = raw_input('Enter your DeepJewel Key: ')
+            self.key = sys.stdin.read().strip()
+            if not self.key:
+                self.key = raw_input('Enter your DeepJewel Key: ')
             deepapi.set_key(self.key)
         except IndexError, e:
             raise MissingKeyException('You must run the test with an extra argument: Your DeepJewel Key')
@@ -43,7 +45,7 @@ everything will be parsed at the server side\nNew lines\ttabs, everything,
     
     def test_03(self): # Recommend
         # It may take some seconds to flush data into database
-        time.sleep(5)
+        time.sleep(1)
         response = deepapi.recommend('en|post', '''Here again we send what text we want to
 base our recommendation, useful texts are user timeline, user feed, product description
 blog post and other relevant information''')
