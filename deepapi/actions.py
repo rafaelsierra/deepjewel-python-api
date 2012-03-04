@@ -3,7 +3,7 @@ import simplejson
 import urllib2
 from deepapi.utils import urlencode
 
-DOMAIN = 'http://ec2-107-22-86-216.compute-1.amazonaws.com'
+DOMAIN = 'http://177.71.179.67:8000'
 ITEM_URL = '%s/api/item.json'%(DOMAIN)
 CAT_URL = '%s/api/category.json'%(DOMAIN)
 RECOMMEND_URL='%s/api/recommend.json'%(DOMAIN)
