@@ -42,18 +42,33 @@ everything will be parsed at the server side\nNew lines\ttabs, everything,
         created = deepapi.send(category, your_data, text)
         # Simple like that :)
         self.assertTrue(created)
-    
-    def test_03(self): # Recommend
+       
+    def test_03(self): # Send user info
+        # Before get recommendations we need to inform DeepJewel about your 
+        # user experiences, what he does, what he writes, the more information
+        # the better will be his recommendations
+        
+        # Each call of deepapi.send_user_info will increase DeepJewel's 
+        # knowledge about your user
+        self.assertTrue(deepapi.send_user_info(42, 'Today I posted on my blog about tabs and new lines.'))
+        
+        # Bit a bit DeepJewel understand better your user behavior
+        self.assertTrue(deepapi.send_user_info(42, 'OMG! This was the biggest email I\'ve ever sent'))
+        
+        # Of course you can always reset your user behavior by sending 
+        # add_info=False, then DeepJewel will forget everything you
+        self.assertTrue(deepapi.send_user_info(24, 'BORA PRA FINAL DA LIBERTADORES SAO PAULO!!!', add_info=False))
+        # By this point, if your user (which we know for the ID 24) had any 
+        # data within DeepJewel, it's already gone (and there's no way to take it back)
+
+    def test_04(self): # Recommend
         # It may take some seconds to flush data into database
         time.sleep(1)
-        response = deepapi.recommend('en|post', '''Here again we send what text we want to
-base our recommendation, useful texts are user timeline, user feed, product description
-blog post and other relevant information''')
-        # Recommendations will always be relevant sorted, first result
-        # being the most relevant and last the least
+        response = deepapi.recommend(42, 'en|post')
+        # Recommendations will always be relevant-sorted, first result
+        # are the most relevant and last the least
         # Inspect this return to get more information
         self.assertEqual(response[0]['your_data'], '1234')
-        
 
 if __name__ == '__main__':
     unittest.main()
